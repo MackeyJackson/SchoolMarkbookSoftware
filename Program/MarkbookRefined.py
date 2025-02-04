@@ -21,8 +21,6 @@ def backgroundLoop():
                 os._exit(0)
 backthread = threading.Thread(name='backgroundLoop', target=backgroundLoop)
 backthread.start()
-#setup for codes and side subroutines
-#clears the output to make ux better
 def clearOutput():
     os.system('cls')
 clearOutput()
@@ -40,9 +38,7 @@ def loadingLoop(message, reps):
         result = ' '.join([message, '...'])
         print(result)
         time.sleep(0.25)
-#checks if the student ID is valid
 def validID (ID):
-    #checks for less than or more than 5 digits
     if len(str(ID)) != 5:
         #clearOutput()
         if len(str(ID)) > 5:
@@ -67,12 +63,9 @@ def nameCheck(name):
         return True
 def listToString(s):
  
-    # initialize an empty string
     str1 = " "
  
-    # return string
     return (str1.join(s))       
-#loads a file from user input
 def loadMarkbook():
     print("TYOPE EXIT INTO ANY INPUT WHEN YOU WISH TO LEAve")
     while True:
@@ -97,7 +90,6 @@ def loadMarkbook():
             clearOutput()
             print("---Incorrect input('load' or 'new')---")
 
-#make table consisting of file loaded
 def displaymarkbook(path):
     head = ["Student Number", "First name", "Last name", "grade"]
     with open(path, "r+") as StudentDB:
@@ -111,9 +103,7 @@ def displaymarkbook(path):
             print(tabulate(mydata, headers=head, tablefmt="grid"))
             loadMarkbook()
 
-#adds a student to the markbook
 def addStudent():
-    #check if missing first name or last name
     while True:
         studentID = input("Enter student id: "); exitList.append(str(studentID.lower()))
         x=-1
@@ -150,14 +140,12 @@ def addStudent():
             print("--Incorrect last name (Alphabetical only)--")
             errorHandle1(studentID, Fname)
         elif nameCheck(Lname) != False:
-            #add to markbook
             markbook.append([studentID, Fname, Lname])
             addMarks(studentID)
             print(f'{studentID}, {Fname}, {Lname}')
         
 
             
-#adds marks to the markbook
 def addMarks(studentID):
     clearOutput()
     print("--add marks--")
@@ -172,7 +160,6 @@ def addMarks(studentID):
             print('--Invalid Mark (0-100)')
 
 
-#calculates the grade and saves it
 def calculateGrade(studentID, mark):
     grade = 'N/A'
     match mark:
@@ -201,7 +188,6 @@ def calculateGrade(studentID, mark):
             addStudent()
         clearOutput()
         print("---Invalid answer (y or n)---")
-#saves the markbook to an actaul file
 def saveMarkbook():
     clearOutput()
     print("---save markbook---")
